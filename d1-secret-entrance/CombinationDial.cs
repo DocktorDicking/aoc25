@@ -1,4 +1,6 @@
-namespace Aoc;
+using d1_secret_entrance.Abstraction;
+
+namespace d1_secret_entrance;
 
 public class CombinationDial : ICombinationDial
 {
@@ -19,7 +21,7 @@ public class CombinationDial : ICombinationDial
     {
         return _dialEventListner.PrintEvents(_startValue);
     }
-    
+
     public void TurnDial(Direction direction, int ticks)
     {
         for (int i = 0; i < ticks; i++)
@@ -51,7 +53,7 @@ public class CombinationDial : ICombinationDial
 
 public class DialEventListner
 {
-    private readonly List<DialEvent> _eventsList= [];
+    private readonly List<DialEvent> _eventsList = [];
 
     public void TrackEvent(Direction direction, int ticks, int value)
     {

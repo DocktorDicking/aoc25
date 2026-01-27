@@ -1,4 +1,6 @@
-namespace Aoc;
+using d1_secret_entrance.Abstraction;
+
+namespace d1_secret_entrance;
 
 public class CombinationSafe : ICombinationSafe
 {
@@ -12,16 +14,16 @@ public class CombinationSafe : ICombinationSafe
         _dial = new CombinationDial(MaxValue, StartValue);
         _turns = [];
     }
-    
+
     public void AddDialTurn(Direction direction, int ticks)
     {
         _turns.Add((direction, ticks));
     }
-    
+
     public CombinationSafe AddDialTurnFromFile(string filepath)
     {
         if (!File.Exists(filepath)) throw new FileNotFoundException("File not found", filepath);
-        
+
         foreach (string line in File.ReadAllLines(filepath))
         {
             char directionChar = line[0];
@@ -31,13 +33,13 @@ public class CombinationSafe : ICombinationSafe
                 AddDialTurn(direction, ticks);
                 continue;
             }
-            
+
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine($"Unable to parse line: {line}");
         }
 
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"Added { _turns.Count } dial turns from file: {filepath}");
+        Console.WriteLine($"Added {_turns.Count} dial turns from file: {filepath}");
         return this;
     }
 
@@ -47,10 +49,10 @@ public class CombinationSafe : ICombinationSafe
     }
 
     public List<string> GetStatistics()
-    { 
+    {
         return _dial.ReadEvents();
     }
-    
+
     private static Direction MapDirection(char direction) => direction switch
     {
         'L' => Direction.Left,

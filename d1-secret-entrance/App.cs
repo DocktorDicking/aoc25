@@ -1,4 +1,6 @@
-namespace Aoc;
+using d1_secret_entrance.Abstraction;
+
+namespace d1_secret_entrance;
 
 public sealed class App
 {
@@ -15,13 +17,13 @@ public sealed class App
             _safe.AddDialTurnFromFile(filePath).Run();
 
             var stats = _safe.GetStatistics();
-            
+
             /* 
              * This spinner is just for animation, the actual work is already finished before we even show the spinner aka lying to the user (ux).
              * A way to "really" show progress would be to use Tasks or something where we iteratively check progress, depending on the needs ofcourse. 
              */
             ShowLoadingAnimation("Processing dial turns...");
-            Console.WriteLine(stats[^1]); 
+            Console.WriteLine(stats[^1]);
         }
         catch (Exception e)
         {
@@ -29,7 +31,7 @@ public sealed class App
             Console.WriteLine("Exception thrown and caught: {0}", e);
         }
     }
-    
+
     private static void ShowLoadingAnimation(string message)
     {
         Console.Write(message);

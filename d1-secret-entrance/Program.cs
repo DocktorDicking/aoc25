@@ -1,5 +1,6 @@
 ﻿
-using Aoc;
+using d1_secret_entrance;
+using d1_secret_entrance.Abstraction;
 using Microsoft.Extensions.DependencyInjection;
 
 var services = new ServiceCollection();
