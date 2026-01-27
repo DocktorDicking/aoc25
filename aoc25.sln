@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "d1-secret-entrance", "d1-secret-entrance\d1-secret-entrance.csproj", "{C42010BF-F35B-4812-8983-647EE6CFFC82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "d2-gift-shop", "d2-gift-shop\d2-gift-shop.csproj", "{BCA1E298-9D37-401D-9F58-1BE31A60955D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C42010BF-F35B-4812-8983-647EE6CFFC82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C42010BF-F35B-4812-8983-647EE6CFFC82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C42010BF-F35B-4812-8983-647EE6CFFC82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C42010BF-F35B-4812-8983-647EE6CFFC82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCA1E298-9D37-401D-9F58-1BE31A60955D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCA1E298-9D37-401D-9F58-1BE31A60955D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCA1E298-9D37-401D-9F58-1BE31A60955D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCA1E298-9D37-401D-9F58-1BE31A60955D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
