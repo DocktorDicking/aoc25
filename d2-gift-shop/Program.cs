@@ -79,3 +79,8 @@ struct Range
         end = long.Parse(rangeParts[1]);
     }
 }
+
+/* TODO part 2
+New rule, ID is invalid when sequence is repeated atleast twice. 123123 or 123123123 are both invalid.
+
+*/
