@@ -1,17 +1,20 @@
 ﻿// See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");
 
-static Range LoadRange(Range range)
+string range = "11-22";
+Range r = new Range(range);
+
+int[] invalidValues = GetInvalidValues(r);
+
+foreach (int value in invalidValues)
 {
-    if (range.start < range.end)
-    {
-        Console.WriteLine("Invalid range");
-        return range;
-    }
-    
-    range.values = Enumerable.Range(range.start, range.end - range.start + 1).ToArray();
-    return range;
+    Console.WriteLine(value);
 }
+
+
+
+
+
 
 static int[] GetInvalidValues(Range range)
 {
@@ -21,21 +24,33 @@ static int[] GetInvalidValues(Range range)
         return [];
     }
 
-    var values = range.values;
-    foreach (var value in values)
+    int[] values = range.values;
+    List<int> invalidValues = [];
+    foreach (int value in values)
     {
-        //TODO
-        return [];
+        if (value > 9)
+        {
+            string s = value.ToString();
+            if (!IsOddLength(s))
+            {
+                int mid = s.Length / 2;
+                string x = s[..mid];
+                if (int.Parse(x + x) == value)
+                {
+                    invalidValues.Add(value);
+                }
+            }
+            
+        }
     }
 
-    return [];
+    return invalidValues.ToArray();
 }
 
-string range = "11-22";
-
-string[] rangeParts = range.Split('-');
-int start = int.Parse(rangeParts[0]);
-int end = int.Parse(rangeParts[1]);
+static bool IsOddLength(string value)
+{
+    return value.Length % 2 != 0;
+}
 
 struct Range
 {
@@ -43,9 +58,29 @@ struct Range
     public int start { get; set; }
     public int end { get; set; }
 
-    public Range(int start, int end)
+    public Range(string range)
     {
-        this.start = start;
-        this.end = end;
+        string[] rangeParts = range.Split('-');
+        start = int.Parse(rangeParts[0]);
+        end = int.Parse(rangeParts[1]);
+        LoadRange();
+    }
+    
+    private void LoadRange()
+    {
+        if (start > end)
+        {
+            Console.WriteLine("Invalid range");
+        }
+    
+        values = Enumerable.Range(start, end - start + 1).ToArray();
     }
 }
+
+/* TODO AOC day 2
+ - parse input. Comma sepp. "x-y" x start y end of range. inclusive
+ - validate range to find invalid id's
+    - an ID is invalid if half id *2 equals the initial ID.
+    - All ID's are integers. Leading zero's are not included.
+ - SUM invalid id's'
+*/
