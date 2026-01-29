@@ -9,10 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="input.txt" />
-    <Resource Include="input.txt">
+    <None Update="input.txt" >
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    </None>
   </ItemGroup>
 
 </Project>

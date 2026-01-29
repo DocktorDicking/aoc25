@@ -1,34 +1,36 @@
 ﻿
 ShowLoadingAnimation("Loading ranges...");
-string ranges = "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,\n1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124";
-string[] rangeParts = ranges.Split(',');
-int[] invalidCollection = [];
+string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "", "input.txt");
+if (!File.Exists(filepath)) throw new FileNotFoundException("File not found", filepath);
+
+string input = File.ReadAllText(filepath);
+string[] rangeParts = input.Split(',');
+long[] invalidCollection = [];
 
 ShowLoadingAnimation("Processing ranges...");
 foreach (string range in rangeParts)
 {
     Range r = new Range(range);
-    int[] invalidValues = GetInvalidValues(r);
+    long[] invalidValues = GetInvalidValues(r);
     
     if (invalidValues.Length > 0)
         invalidCollection = invalidCollection.Concat(invalidValues).ToArray();
 }
 
 ShowLoadingAnimation("Summing invalid values...");
-int sum = invalidCollection.Sum();
+long sum = invalidCollection.Sum();
+
 Console.WriteLine($"The sum of invalid Id's is: {sum}");
 
-static int[] GetInvalidValues(Range range)
+static long[] GetInvalidValues(Range range)
 {
-    if (range.values.Length == 0)
+    if (range.start == 0 || range.end == 0 || range.start > range.end)
     {
-        Console.WriteLine("Values not loaded yet");
-        return [];
+        throw new ArgumentException("Invalid range");
     }
 
-    int[] values = range.values;
-    List<int> invalidValues = [];
-    foreach (int value in values)
+    List<long> invalidValues = [];
+    for (long value = range.start; value <= range.end; value++)
     {
         if (value > 9)
         {
@@ -37,7 +39,7 @@ static int[] GetInvalidValues(Range range)
             {
                 int mid = s.Length / 2;
                 string x = s[..mid];
-                if (int.Parse(x + x) == value)
+                if (long.Parse(x + x) == value)
                 {
                     invalidValues.Add(value);
                 }
@@ -67,26 +69,14 @@ static void ShowLoadingAnimation(string message)
 
 struct Range
 {
-    public int[] values { get; set; }
-    public int start { get; set; }
-    public int end { get; set; }
+    public long start { get; set; }
+    public long end { get; set; }
 
     public Range(string range)
     {
         string[] rangeParts = range.Split('-');
-        start = int.Parse(rangeParts[0]);
-        end = int.Parse(rangeParts[1]);
-        LoadRange();
-    }
-    
-    private void LoadRange()
-    {
-        if (start > end)
-        {
-            Console.WriteLine("Invalid range");
-        }
-    
-        values = Enumerable.Range(start, end - start + 1).ToArray();
+        start = long.Parse(rangeParts[0]);
+        end = long.Parse(rangeParts[1]);
     }
 }
 
