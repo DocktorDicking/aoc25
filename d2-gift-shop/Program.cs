@@ -79,11 +79,3 @@ struct Range
         end = long.Parse(rangeParts[1]);
     }
 }
-
-/* TODO AOC day 2
- - parse input. Comma sepp. "x-y" x start y end of range. inclusive
- - validate range to find invalid id's
-    - an ID is invalid if half id *2 equals the initial ID.
-    - All ID's are integers. Leading zero's are not included.
- - SUM invalid id's'
-*/
