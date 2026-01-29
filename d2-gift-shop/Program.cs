@@ -1,20 +1,22 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿
+ShowLoadingAnimation("Loading ranges...");
+string ranges = "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,\n1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124";
+string[] rangeParts = ranges.Split(',');
+int[] invalidCollection = [];
 
-string range = "11-22";
-Range r = new Range(range);
-
-int[] invalidValues = GetInvalidValues(r);
-
-foreach (int value in invalidValues)
+ShowLoadingAnimation("Processing ranges...");
+foreach (string range in rangeParts)
 {
-    Console.WriteLine(value);
+    Range r = new Range(range);
+    int[] invalidValues = GetInvalidValues(r);
+    
+    if (invalidValues.Length > 0)
+        invalidCollection = invalidCollection.Concat(invalidValues).ToArray();
 }
 
-
-
-
-
+ShowLoadingAnimation("Summing invalid values...");
+int sum = invalidCollection.Sum();
+Console.WriteLine($"The sum of invalid Id's is: {sum}");
 
 static int[] GetInvalidValues(Range range)
 {
@@ -50,6 +52,17 @@ static int[] GetInvalidValues(Range range)
 static bool IsOddLength(string value)
 {
     return value.Length % 2 != 0;
+}
+
+static void ShowLoadingAnimation(string message)
+{
+    Console.Write(message);
+    for (int i = 0; i < 20; i++)
+    {
+        Console.Write(@"|/-\"[i % 4] + "\b");
+        Thread.Sleep(50);
+    }
+    Console.WriteLine(" Done!");
 }
 
 struct Range
