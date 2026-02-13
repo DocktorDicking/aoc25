@@ -32,6 +32,47 @@ static long[] GetInvalidValues(Range range)
     List<long> invalidValues = [];
     for (long value = range.start; value <= range.end; value++)
     {
+        //TODO: Update this code such that is can detect sequences that occure more then twice.
+        /*
+         * For example 11 (1 1) is invalid but now also 111 (1 1 1).
+         * The way we check the rule needs to be changed completly since this code below does not allow flexible checking of sequences.
+         */
+        
+        
+        /*
+        "121"
+        "111"
+        "11"
+        "12"
+        
+        We need to update the code in whole.
+        We need some way of keeping track of a sequence and break as soon as the sequence changes. 
+        
+        So we have to keep checking for a while to be sure the sequence is not repeating?
+        
+        123456 <-- not repeating BUT
+        123456123456 <-- suddenly repeating
+        
+        when do we stop checking? 
+        
+        okeoke so each sequence has a set length.
+        So we check untill we passed half of the sequence and IF it does not start repeating we break. 
+        
+        so if we have the same sequence we keep checking untill "123456 | " and if the next character is not a 1, we break?
+        Sot it shall not alway be half since a seq (sequence) can be odd. So we keep track of the sequence we know of...
+        So basically the ID is invalid untill proven it is not. 
+        
+        A valid ID does not repeat contain a repeting sequence.
+        
+        Psudo:
+        
+        string x (parsed);
+        .....
+        
+        
+        
+         */
+        
         if (value > 9)
         {
             string s = value.ToString();
@@ -44,6 +85,8 @@ static long[] GetInvalidValues(Range range)
                     invalidValues.Add(value);
                 }
             }
+            
+            
             
         }
     }
